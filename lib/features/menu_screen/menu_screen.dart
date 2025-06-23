@@ -24,17 +24,12 @@ class MenuScreen extends StatelessWidget {
 }
 
 @RoutePage()
-class MenuWrapperScreen extends StatelessWidget implements AutoRouteWrapper {
+class MenuWrapperScreen extends StatelessWidget {
   const MenuWrapperScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return AutoRouter();
-  }
-
-  @override
-  Widget wrappedRoute(BuildContext context) {
-    return this;
   }
 
 }

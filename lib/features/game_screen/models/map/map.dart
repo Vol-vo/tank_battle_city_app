@@ -39,6 +39,7 @@ class GameMap {
 
   MapBlock _generateBlock(int x, int y) {
 
+
     return MapBlock(positions: Positions(x, y), type: _getRandomType());
   }
 

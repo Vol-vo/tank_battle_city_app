@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tank_battle_city/di/injectable_config.dart';
 import 'package:tank_battle_city/features/menu_screen/menu_screen_bloc/menu_screen_bloc.dart';
 import 'package:tank_battle_city/main/router/app_router.dart';
 
@@ -22,8 +21,5 @@ class _StarterMainState extends State<StarterMain> {
     ], child: MaterialApp.router(
       routerConfig: appRouter.config(),
     ),);
-    // return MaterialApp.router(
-    //   routerConfig: appRouter.config(),
-    // );
   }
 }
