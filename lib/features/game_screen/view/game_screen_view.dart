@@ -13,11 +13,16 @@ class GameScreenView extends StatelessWidget {
 
     return SafeArea(
       child: ColoredBox(color: AppColor.background, child:
-      InteractiveViewer(
-        child: StreamBuilder(stream: presenter.mapIsGenerated, builder: (context, snapshot) {
-          if (snapshot.data == false) return CircularProgressIndicator();
-          return MapWidget();
-        }),
+      Center(
+        child: StreamBuilder(
+          stream: presenter.mapIsGenerated,
+          builder: (context, snapshot) {
+            if (snapshot.data == false || snapshot.data == null) return SizedBox(height: 35, width: 35, child: CircularProgressIndicator(color: Colors.white));
+            return InteractiveViewer(
+                child: MapWidget(),
+            );
+          }
+        ),
       )
         ,),
     );

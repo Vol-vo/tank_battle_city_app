@@ -8,15 +8,13 @@ class MapWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final presenter = context.read<GameScreenPresenter>();
-    final map = presenter.map;
 
-    return OverflowBox(child:
-    Row(children: [
+    return Row(children: [
       for (int y = 0; y < presenter.sizeMap; y++) Column(
         children: [
           for (int x = 0; x < presenter.sizeMap; x++) presenter.getBlockWidgetFromPosition(x, y)
         ],
       )
-    ],),);
+    ],);
   }
 }
