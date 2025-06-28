@@ -11,6 +11,7 @@ class MapWidget extends StatelessWidget {
 
     return Row(children: [
       for (int y = 0; y < presenter.sizeMap; y++) Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           for (int x = 0; x < presenter.sizeMap; x++) presenter.getBlockWidgetFromPosition(x, y)
         ],

@@ -8,6 +8,7 @@ class Ice extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final presenter = context.read<GameScreenPresenter>();
-    return ColoredBox(color: Colors.white, child: SizedBox(height: presenter.sizeMap.toDouble(), width: presenter.sizeMap.toDouble(),),);
+    final size = MediaQuery.of(context).size.width / presenter.sizeMap;
+    return ColoredBox(color: Colors.white, child: SizedBox(height: size, width: size,),);
   }
 }
