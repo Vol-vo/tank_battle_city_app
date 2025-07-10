@@ -8,7 +8,7 @@ class Forest extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final presenter = context.read<GameScreenPresenter>();
-    final size = MediaQuery.of(context).size.width / presenter.sizeMap;
+    final size = MediaQuery.of(context).size.width / presenter.mapSize;
     return ColoredBox(color: Colors.green, child: SizedBox(height: size, width: size,),);
   }
 }

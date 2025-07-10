@@ -1,12 +1,14 @@
 import 'dart:math';
 
 import 'package:rxdart/rxdart.dart';
-import 'package:tank_battle_city/features/game_screen/models/map/map_blocks/map_block.dart';
-import 'package:tank_battle_city/features/game_screen/models/map/position.dart';
-import 'package:tank_battle_city/features/game_screen/models/map/map_items_type.dart';
+import 'package:tank_battle_city/features/game_screen/models/game/map/map_blocks/map_block.dart';
+import 'package:tank_battle_city/features/game_screen/models/game/map/map_items_type.dart';
+import 'package:tank_battle_city/features/game_screen/models/game/map/position.dart';
 
 class GameMap {
-  GameMap ({required this.size});
+  GameMap ({required this.size}){
+    init();
+  }
 
   List<List<MapBlock>> blocks = [];
   BehaviorSubject<bool> mapIsGenerated = BehaviorSubject.seeded(false);

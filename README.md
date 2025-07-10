@@ -1,6 +1,6 @@
 # tank_battle_city
 
-#rules:
+#base:
 https://economicusgame.com/tanchiki
 
 At the moment it is a concept, not really game

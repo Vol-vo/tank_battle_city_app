@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tank_battle_city/features/game_screen/view/components/map_widget.dart';
+import 'package:tank_battle_city/features/game_screen/view/components/map/map_widget.dart';
 import 'package:tank_battle_city/features/game_screen/view/game_screen_presenter.dart';
 import 'package:tank_battle_city/theme/app_color.dart';
 

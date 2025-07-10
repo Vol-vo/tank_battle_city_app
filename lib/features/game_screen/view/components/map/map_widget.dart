@@ -10,10 +10,10 @@ class MapWidget extends StatelessWidget {
     final presenter = context.read<GameScreenPresenter>();
 
     return Row(children: [
-      for (int y = 0; y < presenter.sizeMap; y++) Column(
+      for (int y = 0; y < presenter.mapSize; y++) Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          for (int x = 0; x < presenter.sizeMap; x++) presenter.getBlockWidgetFromPosition(x, y)
+          for (int x = 0; x < presenter.mapSize; x++) presenter.getBlockWidgetFromPosition(x, y)
         ],
       )
     ],);

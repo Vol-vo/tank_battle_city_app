@@ -11,7 +11,7 @@ class GameScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Provider<GameScreenPresenter>(
-        create: (_)  => GameScreenPresenter()..init(),
+        create: (_)  => GameScreenPresenter(),
         child: GameScreenView());
   }
 }
