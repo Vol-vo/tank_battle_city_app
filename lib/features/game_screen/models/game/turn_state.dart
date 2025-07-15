@@ -7,7 +7,7 @@ class TurnState {
   final List<Tank> tanks;
   final GameMap map;
 
-  TurnState copyWith({List<Tank>? tanks, GameMap? map}){
+  TurnState copyWith({List<Tank>? tanks, GameMap? map}) {
     return TurnState(tanks: tanks ?? this.tanks, map: map ?? this.map);
   }
 }

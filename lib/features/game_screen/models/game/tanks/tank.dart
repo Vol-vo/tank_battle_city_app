@@ -17,7 +17,7 @@ abstract class Tank {
   Direction direction;
   GameMap map;
 
-  Position getMove(List<Tank> tanks);
+  Position move(List<Tank> tanks);
 
   Position? getPositionAfterTurnAndGo(Direction direction, int move) {
     late Position newPosition;
@@ -41,4 +41,12 @@ abstract class Tank {
 
     return newPosition;
   }
+
+  Tank copyWith({
+    int? healthPoint,
+    int? attach,
+    Position? position,
+    Direction? direction,
+    GameMap? map,
+  });
 }

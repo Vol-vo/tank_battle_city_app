@@ -20,9 +20,10 @@ class Game {
   late GameMap map;
 
   List<TurnState> turns = [];
+  late BehaviorSubject<int> countTurns;
 
   TurnState get lastTurn => turns.last;
-
+  List<Tank> get tanks => lastTurn.tanks;
   BehaviorSubject<bool> get mapIsGenerated => map.mapIsGenerated;
 
   MapBlock getBlock(int x, int y) => map.getBlock(x, y);
@@ -31,11 +32,17 @@ class Game {
 
   void init() {
     map = GameMap(size: settings.mapSize);
-    final tanks = List.generate(4, (index) => _generateTank()).toList();
+    final tanks = List.generate(settings.countBots, (index) => _generateTank()).toList();
     turns.add(TurnState(tanks: tanks, map: map));
+    countTurns = BehaviorSubject.seeded(turns.length);
   }
 
-  Tank _generateTank(){
+  void dispose() {
+    map.dispose();
+    countTurns.close();
+  }
+
+  Tank _generateTank() {
     var pos = Position(0, 0);
     while (true) {
       pos = Position(Random().nextInt(map.size), Random().nextInt(map.size));
@@ -46,8 +53,21 @@ class Game {
     return DefaultTankBot(position: pos, direction: direction, map: map);
   }
 
-  void nextTurns(){
+  void nextTurn() {
+    List<Tank> newTank = [];
+    for (final tank in tanks) {
+      newTank.add(tank.copyWith(position: tank.move(tanks)));
+    }
 
+    turns.add(TurnState(tanks: newTank, map: map));
+    countTurns.add(turns.length);
+  }
+
+  void previousTurn() {
+    if (turns.isEmpty || countTurns.value <= 1) return;
+
+    turns.removeLast();
+    countTurns.add(turns.length);
   }
 
   bool blockWithTank(int x, int y) {

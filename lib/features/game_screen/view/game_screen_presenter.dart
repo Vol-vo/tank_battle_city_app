@@ -29,6 +29,7 @@ class GameScreenPresenter {
   GameSettings get gameSettings => game.settings;
 
   BehaviorSubject<bool> get mapIsGenerated => game.mapIsGenerated;
+  BehaviorSubject<int> get countTurns => game.countTurns;
 
   MapBlock getBlock (int x, int y) => game.getBlock(x, y);
 
@@ -75,5 +76,12 @@ class GameScreenPresenter {
     }
   }
 
+  void nextTurn() {
+    game.nextTurn();
+  }
+
+  void previousTurn() {
+    game.previousTurn();
+  }
 
 }

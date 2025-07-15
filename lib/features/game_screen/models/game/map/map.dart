@@ -19,6 +19,10 @@ class GameMap {
      _generateMap();
   }
 
+  void dispose() {
+    mapIsGenerated.close();
+  }
+
   MapBlock getBlock (int x, int y) {
     return blocks[y][x];
   }

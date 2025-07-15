@@ -10,23 +10,25 @@ part 'app_router.gr.dart';
 
 @AutoRouterConfig()
 class AppRouter extends RootStackRouter {
-
   @override
   List<AutoRoute> get routes => [
-    AutoRoute(page: HomeRoute.page,
-        initial: true,
-        children: [
-          AutoRoute(page: MenuWrapperRoute.page,
+    AutoRoute(
+      page: HomeRoute.page,
+      initial: true,
+      children: [
+        AutoRoute(
+          page: MenuWrapperRoute.page,
           children: [
-            AutoRoute(page: MenuRoute.page, path: AppRoutes.menuScreen, initial: true,),
-            AutoRoute(page: GameRoute.page, path: AppRoutes.gameScreen)
-          ]
-          ),
-      // AutoRoute(page: MenuRoute.page, path: AppRoutes.menuScreen, initial: true,
-          //   children: [AutoRoute(page: GameRoute.page, path: AppRoutes.gameScreen)],
-          // ),
-      AutoRoute(page: HistoryGameRoute.page, path: AppRoutes.historyGameScreen),
-    ]),
-    // AutoRoute(page: GameRoute.page, path: AppRoutes.gameScreen)
+            AutoRoute(
+              page: MenuRoute.page,
+              path: AppRoutes.menuScreen,
+              initial: true,
+            ),
+          ],
+        ),
+        AutoRoute(page: HistoryGameRoute.page, path: AppRoutes.historyGameScreen),
+      ],
+    ),
+    AutoRoute(page: GameRoute.page, path: '/${AppRoutes.gameScreen}'),
   ];
 }
