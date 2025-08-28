@@ -15,27 +15,26 @@ class GameScreenView extends StatelessWidget {
     return SafeArea(
       child: StreamBuilder(
         stream: presenter.countTurns,
-        builder: (context, asyncSnapshot) {
+        builder: (context, snapshot) {
           return Scaffold(
-            appBar: AppBar(centerTitle: true, title: Text('Turns: ${presenter.countTurns.value.toString()}')),
+            appBar: AppBar(
+              centerTitle: true,
+              iconTheme: IconThemeData(color: Colors.white, size: 25),
+              title: Text('Turns: ${presenter.countTurns.value.toString()}', style: TextStyle(color: Colors.white)),
+              backgroundColor: AppColor.background,
+            ),
             body: ColoredBox(
               color: AppColor.background,
-              child: StreamBuilder(
-                stream: presenter.mapIsGenerated,
-                builder: (context, snapshot) {
-                  if (snapshot.data == false || snapshot.data == null) {
-                    return Center(
-                      child: SizedBox(height: 35, width: 35, child: CircularProgressIndicator(color: Colors.white)),
-                    );
-                  }
-                  return Column(
-                    children: [
-                      InteractiveViewer(child: MapWidget()),
-                      ControlButton(),
-                    ],
-                  );
-                },
-              ),
+              child: snapshot.data != 0
+                  ? Column(
+                      children: [
+                        InteractiveViewer(child: MapWidget()),
+                        ControlButton(),
+                      ],
+                    )
+                  : Center(
+                      child: SizedBox(width: 40, height: 40, child: CircularProgressIndicator(color: Colors.white)),
+                    ),
             ),
           );
         },

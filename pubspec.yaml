@@ -16,6 +16,7 @@ dependencies:
   provider: ^6.1.5
   rxdart: 0.28.0
   flutter_svg: ^2.2.0
+  cached_network_image: ^3.4.1
 
 dev_dependencies:
 #  flutter_test:
@@ -32,4 +33,4 @@ flutter:
   assets:
     - pubspec.yaml
     - assets/svg/
-
+    - assets/image/

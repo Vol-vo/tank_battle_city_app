@@ -11,11 +11,10 @@ class StarterMain extends StatefulWidget {
 }
 
 class _StarterMainState extends State<StarterMain> {
+  final appRouter = AppRouter();
 
   @override
   Widget build(BuildContext context) {
-    final appRouter = AppRouter();
-
     return MultiBlocProvider(providers: [
       BlocProvider(create: (_) => MenuScreenBloc(),)
     ], child: MaterialApp.router(

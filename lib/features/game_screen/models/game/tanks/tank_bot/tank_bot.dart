@@ -1,8 +1,6 @@
 import 'dart:math';
 
-import 'package:flutter/cupertino.dart';
 import 'package:tank_battle_city/features/game_screen/models/game/map/map.dart';
-import 'package:tank_battle_city/features/game_screen/models/game/map/map_items_type.dart';
 import 'package:tank_battle_city/features/game_screen/models/game/map/position.dart';
 import 'package:tank_battle_city/features/game_screen/models/game/tanks/direction.dart';
 import 'package:tank_battle_city/features/game_screen/models/game/tanks/tank.dart';
@@ -18,12 +16,13 @@ class DefaultTankBot extends Tank {
   });
 
   @override
-  Position move(List<Tank> tanks) {
+  void move(List<Tank> tanks) {
     final dir = Direction.values[Random().nextInt(4)];
     final move = Random().nextInt(3);
     final newPosition = getPositionAfterTurnAndGo(dir, move);
 
-    return newPosition ?? position;
+    direction = dir;
+    position = newPosition ?? position;
   }
 
   @override

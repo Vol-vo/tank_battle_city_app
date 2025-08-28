@@ -7,5 +7,14 @@ class MapBlock {
 
   final Position positions;
   final MapItemsType type;
-  
+
+  MapBlock copyWith({
+    Position? positions,
+    MapItemsType? type,
+  }) {
+    return MapBlock(
+      positions: positions ?? this.positions,
+      type: type ?? this.type,
+    );
+  }
 }

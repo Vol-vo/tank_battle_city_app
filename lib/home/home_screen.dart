@@ -11,13 +11,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // final appRouter = ;
-
-  @override
-  void initState() {
-    super.initState();
-    // appRouter = GetIt.I<AppRouter>();
-  }
 
   @override
   Widget build(BuildContext context) {

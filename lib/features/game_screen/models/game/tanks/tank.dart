@@ -1,4 +1,5 @@
 import 'package:tank_battle_city/features/game_screen/models/game/map/map.dart';
+import 'package:tank_battle_city/features/game_screen/models/game/map/map_items_type.dart';
 import 'package:tank_battle_city/features/game_screen/models/game/map/position.dart';
 import 'package:tank_battle_city/features/game_screen/models/game/tanks/direction.dart';
 
@@ -17,7 +18,7 @@ abstract class Tank {
   Direction direction;
   GameMap map;
 
-  Position move(List<Tank> tanks);
+  void move(List<Tank> tanks);
 
   Position? getPositionAfterTurnAndGo(Direction direction, int move) {
     late Position newPosition;
@@ -38,6 +39,11 @@ abstract class Tank {
     }
 
     if (newPosition.x < 0 || newPosition.x >= map.size || newPosition.y < 0 || newPosition.y >= map.size) return null;
+
+    final type = map.getBlockType(newPosition.x, newPosition.y);
+    if (type == MapItemsType.concrete || type == MapItemsType.water || type == MapItemsType.wholeBrickWall || type == MapItemsType.halfRuinedWall) {
+      return null;
+    }
 
     return newPosition;
   }

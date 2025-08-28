@@ -13,10 +13,12 @@ class MenuScreen extends StatelessWidget {
     return SafeArea(
       child: Column(
         children: [
-        ElevatedButton(onPressed: (){
-          print('print1');
-      menuBloc.add(StartGameEvent(router: context.router));
-    }, child: Text('Стартуем')),
+          ElevatedButton(
+            onPressed: () {
+              menuBloc.add(StartGameEvent(router: context.router));
+            },
+            child: Text('Стартуем'),
+          ),
         ],
       ),
     );
@@ -31,7 +33,4 @@ class MenuWrapperScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return AutoRouter();
   }
-
 }
-
-

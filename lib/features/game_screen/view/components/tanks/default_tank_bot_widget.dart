@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:tank_battle_city/assets.dart';
 import 'package:tank_battle_city/features/game_screen/models/game/tanks/direction.dart';
 import 'package:tank_battle_city/features/game_screen/view/game_screen_presenter.dart';
 import 'dart:ui' as ui;
+
+import 'package:tank_battle_city/generated/assets.dart';
 
 class DefaultTankBotWidget extends StatelessWidget {
   const DefaultTankBotWidget({super.key, required this.direction});
@@ -18,7 +19,7 @@ class DefaultTankBotWidget extends StatelessWidget {
 
     return Transform.rotate(
       angle: presenter.getAngleFromDirection(direction),
-      child: SizedBox(height: size, width: size, child: SvgPicture.asset(Assets.defaultTank, colorFilter: ui.ColorFilter.mode(Colors.white, BlendMode.srcIn),)),
+      child: SizedBox(height: size, width: size, child: SvgPicture.asset(Assets.svgDefaultTank, colorFilter: ui.ColorFilter.mode(Colors.white, BlendMode.srcIn),)),
     );
   }
 }
