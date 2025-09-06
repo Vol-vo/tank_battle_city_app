@@ -25,16 +25,16 @@ abstract class Tank {
 
     switch (direction) {
       case Direction.north:
-        newPosition = position.copyWith(y: position.y - move);
+        newPosition = position.copyWith(x: position.x - move);
         break;
       case Direction.south:
-        newPosition = position.copyWith(y: position.y + move);
+        newPosition = position.copyWith(x: position.x + move);
         break;
       case Direction.west:
-        newPosition = position.copyWith(x: position.x - move);
+        newPosition = position.copyWith(y: position.y - move);
         break;
       case Direction.east:
-        newPosition = position.copyWith(x: position.x - move);
+        newPosition = position.copyWith(y: position.y - move);
         break;
     }
 
