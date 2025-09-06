@@ -25,7 +25,7 @@ class GameScreenView extends StatelessWidget {
             ),
             body: ColoredBox(
               color: AppColor.background,
-              child: snapshot.data != 0
+              child: snapshot.hasData && snapshot.data! != 0
                   ? Column(
                       children: [
                         InteractiveViewer(child: MapWidget()),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tank_battle_city/features/game_screen/models/game/map/map_items_type.dart';
 import 'package:tank_battle_city/features/game_screen/view/components/map/map_components/map_components.dart';
-import 'package:tank_battle_city/features/game_screen/view/components/tanks/tanks.dart';
+import 'package:tank_battle_city/features/game_screen/view/components/tanks/tank_widgets.dart';
 import 'package:tank_battle_city/features/game_screen/view/game_screen_presenter.dart';
 
 class MapWidget extends StatelessWidget {

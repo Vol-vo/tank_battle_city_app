@@ -39,10 +39,7 @@ class GameMap {
   MapBlock _generateBlock(int x, int y) {
     var items = _getPossibleItems(x, y);
 
-    var block = MapBlock(positions: Position(x, y), type: _getRandomType(items));
-
-    print('BLOCK: ${block.type}');
-    return block;
+    return MapBlock(positions: Position(x, y), type: _getRandomType(items));
   }
 
   List<MapItemsType> _getPossibleItems(int x, int y) {

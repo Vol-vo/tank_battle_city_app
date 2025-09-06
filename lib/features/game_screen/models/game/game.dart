@@ -32,7 +32,8 @@ class Game {
 
   Future<void> init() async {
     map = GameMap(size: settings.mapSize);
-    final tanks = List.generate(settings.countBots, (index) => _generateTank()).toList();
+    // final tanks = List.generate(settings.countBots, (index) => _generateTank()).toList();
+    final tanks = _generateTanks(0, 0, settings.mapSize - 1, settings.mapSize - 1, settings.countBots);
     turns.add(TurnState(tanks: tanks, map: map));
     countTurns = BehaviorSubject.seeded(turns.length);
   }
@@ -42,16 +43,47 @@ class Game {
     countTurns.close();
   }
 
-  Tank _generateTank() {
-    late Position pos;
-    while (true) {
-      pos = Position(Random().nextInt(map.size), Random().nextInt(map.size));
-      if (map.getBlockType(pos.x, pos.y) == MapItemsType.earth) break;
+  List<Tank> _generateTanks(int x1, int y1, int x2, int y2, int countTanks) {
+    if (countTanks <= 0) return [];
+    if (countTanks == 1) return [_generateTankInBlock(x1, y1, x2, y2)];
+
+    List<Tank> tanks = [];
+
+    final width = x2 - x1;
+    final height = y2 - y1;
+
+    if (width > height) {
+      final midX = x1 + width ~/ 2;
+
+      tanks.addAll(_generateTanks(x1, y1, midX, y2, countTanks ~/ 2));
+      tanks.addAll(_generateTanks(midX + 1, y1, x2, y2, countTanks - countTanks ~/ 2));
+    } else {
+      final midY = y1 + height ~/ 2;
+
+      tanks.addAll(_generateTanks(x1, y1, x2, midY, countTanks ~/ 2));
+      tanks.addAll(_generateTanks(x1, midY + 1, x2, y2, countTanks - countTanks ~/ 2));
     }
 
-    final direction = Direction.values[Random().nextInt(4)];
-    return DefaultTankBot(position: pos, direction: direction, map: map);
+    return tanks;
   }
+
+
+  Tank _generateTankInBlock(int x1, int y1, int x2, int y2) {
+    List<Position> earthPosition = [];
+    for (int i = y1; i <= y2; i++) {
+      for (int j = x1; j <= x2; j++) {
+        if (getBlockType(j, i) == MapItemsType.earth) {
+          earthPosition.add(Position(j, i));
+        }
+      }
+    }
+
+    final Position position = earthPosition[Random().nextInt(earthPosition.length)];
+    final direction = Direction.values[Random().nextInt(Direction.values.length)];
+
+    return DefaultTankBot(position: position, direction: direction, map: map);
+  }
+
 
   void nextTurn() {
     List<Tank> newTanks = [];
