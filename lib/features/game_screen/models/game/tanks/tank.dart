@@ -18,6 +18,9 @@ abstract class Tank {
   Direction direction;
   GameMap map;
 
+  bool get isAlive => healthPoint > 0;
+  bool get isNotAlive => !isAlive;
+
   void move(List<Tank> tanks);
 
   Position? getPositionAfterTurnAndGo(Direction direction, int move) {
@@ -25,34 +28,57 @@ abstract class Tank {
 
     switch (direction) {
       case Direction.north:
-        newPosition = position.copyWith(x: position.x - move);
+        for (int i = 0; i <= move; i++) {
+          if (tankCanStand(position.x - i, position.y)) {
+            newPosition = position.copyWith(x: position.x - i);
+          } else {
+            break;
+          }
+        }
         break;
       case Direction.south:
-        newPosition = position.copyWith(x: position.x + move);
+        for (int i = 0; i <= move; i++) {
+          if (tankCanStand(position.x + i, position.y)) {
+            newPosition = position.copyWith(x: position.x + i);
+          } else {
+            break;
+          }
+        }
         break;
       case Direction.west:
-        newPosition = position.copyWith(y: position.y - move);
+        for (int i = 0; i <= move; i++) {
+          if (tankCanStand(position.x, position.y - i)) {
+            newPosition = position.copyWith(y: position.y - i);
+          } else {
+            break;
+          }
+        }
         break;
       case Direction.east:
-        newPosition = position.copyWith(y: position.y - move);
+        for (int i = 0; i <= move; i++) {
+          if (tankCanStand(position.x, position.y + i)) {
+            newPosition = position.copyWith(y: position.y + i);
+          } else {
+            break;
+          }
+        }
         break;
-    }
-
-    if (newPosition.x < 0 || newPosition.x >= map.size || newPosition.y < 0 || newPosition.y >= map.size) return null;
-
-    final type = map.getBlockType(newPosition.x, newPosition.y);
-    if (type == MapItemsType.concrete || type == MapItemsType.water || type == MapItemsType.wholeBrickWall || type == MapItemsType.halfRuinedWall) {
-      return null;
     }
 
     return newPosition;
   }
 
-  Tank copyWith({
-    int? healthPoint,
-    int? attach,
-    Position? position,
-    Direction? direction,
-    GameMap? map,
-  });
+  bool tankCanStand(int x, int y) {
+    final blockType = map.getBlockTypeOrNull(x, y);
+    if (blockType == MapItemsType.earth ||
+        blockType == MapItemsType.ice ||
+        blockType == MapItemsType.forest ||
+        blockType == MapItemsType.ruinedWall) {
+      return true;
+    }
+
+    return false;
+  }
+
+  Tank copyWith({int? healthPoint, int? attach, Position? position, Direction? direction, GameMap? map});
 }

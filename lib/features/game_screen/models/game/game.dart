@@ -32,7 +32,6 @@ class Game {
 
   Future<void> init() async {
     map = GameMap(size: settings.mapSize);
-    // final tanks = List.generate(settings.countBots, (index) => _generateTank()).toList();
     final tanks = _generateTanks(0, 0, settings.mapSize - 1, settings.mapSize - 1, settings.countBots);
     turns.add(TurnState(tanks: tanks, map: map));
     countTurns = BehaviorSubject.seeded(turns.length);
@@ -88,44 +87,46 @@ class Game {
   void nextTurn() {
     List<Tank> newTanks = [];
     for (final tank in tanks) {
+      if (tank.isNotAlive) continue;
+
       final newTank = tank.copyWith()
       ..move(tanks);
       newTanks.add(newTank);
     }
 
-    _fireAllTanks();
+    _fireAllTanks(newTanks);
 
     turns.add(TurnState(tanks: newTanks, map: map));
     countTurns.add(turns.length);
   }
 
-  void _fireAllTanks() {
-    for (final tank in tanks) {
+  void _fireAllTanks(List<Tank> newTanks) {
+    for (final tank in newTanks) {
       switch (tank.direction) {
-        case Direction.north:
-          for (int i = tank.position.y - 1; i >= 0; i--) {
-            if (map.blockIsInterfereForFire(tank.position.x, i) || _isHitTheTank(tank.position.x, i, tank.attach)) {
-              break;
-            }
-          }
-          break;
         case Direction.south:
-          for (int i = tank.position.y + 1; i < mapSize; i++) {
-            if (map.blockIsInterfereForFire(tank.position.x, i) || _isHitTheTank(tank.position.x, i, tank.attach)) {
+          for (int i = tank.position.x + 1; i < mapSize; i++) {
+            if (map.blockIsInterfereForFire(i, tank.position.y) || _isHitTheTank(i, tank.position.x, tank.attach, newTanks)) {
               break;
             }
           }
           break;
-        case Direction.west:
+        case Direction.north:
           for (int i = tank.position.x - 1; i >= 0; i--) {
-            if (map.blockIsInterfereForFire(i, tank.position.y) || _isHitTheTank(i, tank.position.y, tank.attach)) {
+            if (map.blockIsInterfereForFire(i, tank.position.y) || _isHitTheTank(i, tank.position.x, tank.attach, newTanks)) {
               break;
             }
           }
           break;
         case Direction.east:
-          for (int i = tank.position.x + 1; i < mapSize; i++) {
-            if (map.blockIsInterfereForFire(i, tank.position.y) || _isHitTheTank(i, tank.position.y, tank.attach)) {
+          for (int i = tank.position.y + 1; i < mapSize; i++) {
+            if (map.blockIsInterfereForFire(tank.position.x, i) || _isHitTheTank(tank.position.y, i, tank.attach, newTanks)) {
+              break;
+            }
+          }
+          break;
+        case Direction.west:
+          for (int i = tank.position.y - 1; i >= 0; i--) {
+            if (map.blockIsInterfereForFire(tank.position.x, i) || _isHitTheTank(tank.position.y, i, tank.attach, newTanks)) {
               break;
             }
           }
@@ -134,10 +135,10 @@ class Game {
     }
   }
 
-  bool _isHitTheTank(int x, int y, int hit) {
+  bool _isHitTheTank(int x, int y, int hit, List<Tank> tanks) {
     for (final tank in tanks) {
       if (tank.position.x == x && tank.position.y == y){
-        tank.healthPoint =- hit;
+        tank.healthPoint -= hit;
         return true;
       }
     }
@@ -154,7 +155,7 @@ class Game {
 
   bool blockWithTank(int x, int y) {
     for (var tank in lastTurn.tanks) {
-      if (tank.position == Position(x, y)) return true;
+      if (tank.position == Position(x, y) && tank.isAlive) return true;
     }
 
     return false;

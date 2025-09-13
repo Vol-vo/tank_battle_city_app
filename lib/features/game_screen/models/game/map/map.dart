@@ -57,8 +57,6 @@ class GameMap {
     return items;
   }
 
-
-
   MapItemsType _getRandomType(List<MapItemsType> items) {
     int random = Random().nextInt(items.length);
     return items[random];
@@ -82,4 +80,5 @@ class GameMap {
   void _setNewBlockType(int x, int y, MapItemsType newType) {
     blocks[y][x] = blocks[y][x].copyWith(type: newType);
   }
+
 }

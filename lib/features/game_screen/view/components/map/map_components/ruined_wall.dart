@@ -12,6 +12,7 @@ class RuinedWall extends StatelessWidget {
     final size = MediaQuery.of(context).size.width / presenter.mapSize;
     // Temporarily
     // TODO(volvo): add normal texture
-    return Opacity(opacity: 0.2, child: SizedBox(height: size, width: size,child: Image.asset(Assets.imageBrickWhole),));
+    // return Opacity(opacity: 0.2, child: SizedBox(height: size, width: size,child: Image.asset(Assets.imageBrickWhole),));
+    return ColoredBox(color: Colors.black, child: SizedBox(height: size, width: size,),);
   }
 }
