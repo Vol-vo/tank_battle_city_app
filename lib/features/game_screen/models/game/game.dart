@@ -80,7 +80,7 @@ class Game {
     final Position position = earthPosition[Random().nextInt(earthPosition.length)];
     final direction = Direction.values[Random().nextInt(Direction.values.length)];
 
-    return DefaultTankBot(position: position, direction: direction, map: map);
+    return DefaultTankBot(position: position, direction: direction, map: map, name: 'WWWWWWWWWWWWWWWW');
   }
 
 

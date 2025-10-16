@@ -1,1 +1,0 @@
-//TODO: Here will have a logic for a bot

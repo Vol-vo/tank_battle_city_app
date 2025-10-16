@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tank_battle_city/features/game_screen/view/game_screen_presenter.dart';
+import 'package:tank_battle_city/features/game_screen/view/game_screen_view_model.dart';
 import 'package:tank_battle_city/theme/app_color.dart';
 
 class ControlButton extends StatelessWidget {
@@ -8,7 +8,7 @@ class ControlButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final presenter = context.read<GameScreenPresenter>();
+    final presenter = context.read<GameScreenViewModel>();
 
     return Row(
       children: [

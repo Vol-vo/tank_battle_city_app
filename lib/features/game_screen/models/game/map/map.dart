@@ -80,5 +80,4 @@ class GameMap {
   void _setNewBlockType(int x, int y, MapItemsType newType) {
     blocks[y][x] = blocks[y][x].copyWith(type: newType);
   }
-
 }

@@ -3,6 +3,8 @@ import 'package:tank_battle_city/features/game_screen/models/game/map/map_items_
 import 'package:tank_battle_city/features/game_screen/models/game/map/position.dart';
 import 'package:tank_battle_city/features/game_screen/models/game/tanks/direction.dart';
 
+import 'complexity.dart';
+
 abstract class Tank {
   Tank({
     required this.healthPoint,
@@ -10,10 +12,14 @@ abstract class Tank {
     required this.position,
     required this.direction,
     required this.map,
+    required this.name,
   });
 
   int healthPoint;
+  int get maxHealthPoint;
   int attach;
+  String name;
+  abstract Complexity complexity;
   Position position;
   Direction direction;
   GameMap map;

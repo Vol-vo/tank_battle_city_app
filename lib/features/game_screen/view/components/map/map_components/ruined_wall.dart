@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:tank_battle_city/features/game_screen/view/game_screen_presenter.dart';
-import 'package:tank_battle_city/generated/assets.dart';
 
 class RuinedWall extends StatelessWidget {
-  const RuinedWall({super.key});
+  const RuinedWall({super.key, required this.size});
+
+  final double size;
 
   @override
   Widget build(BuildContext context) {
-    final presenter = context.read<GameScreenPresenter>();
-    final size = MediaQuery.of(context).size.width / presenter.mapSize;
     // Temporarily
     // TODO(volvo): add normal texture
     // return Opacity(opacity: 0.2, child: SizedBox(height: size, width: size,child: Image.asset(Assets.imageBrickWhole),));

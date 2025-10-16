@@ -1,17 +1,13 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:tank_battle_city/features/game_screen/view/game_screen_presenter.dart';
 
 class Concrete extends StatelessWidget {
-  const Concrete({super.key});
+  const Concrete({super.key, required this.size});
+
+  final double size;
+  static const countMiniBlock = 2;
 
   @override
   Widget build(BuildContext context) {
-    final presenter = context.read<GameScreenPresenter>();
-    final size = MediaQuery.of(context).size.width / presenter.mapSize;
-    final countMiniBlock = 2;
     return Column(
       children: [
         for (int i = 0; i < countMiniBlock; i++)
@@ -21,7 +17,7 @@ class Concrete extends StatelessWidget {
                 SizedBox(
                   height: size / countMiniBlock,
                   width: size / countMiniBlock,
-                  child: CustomPaint(painter: _ConcreteCustomPainter()),
+                  child: const CustomPaint(painter: _ConcreteCustomPainter()),
                 ),
             ],
           ),
@@ -31,6 +27,8 @@ class Concrete extends StatelessWidget {
 }
 
 class _ConcreteCustomPainter extends CustomPainter {
+  const _ConcreteCustomPainter();
+
   @override
   void paint(Canvas canvas, Size size) {
     final paintMiniReact = Paint()..color = Colors.white;

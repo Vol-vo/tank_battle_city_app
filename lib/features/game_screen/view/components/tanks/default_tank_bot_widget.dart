@@ -1,25 +1,75 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:tank_battle_city/features/game_screen/models/game/tanks/direction.dart';
-import 'package:tank_battle_city/features/game_screen/view/game_screen_presenter.dart';
+import 'package:tank_battle_city/features/game_screen/models/game/tanks/tank.dart';
+import 'package:tank_battle_city/features/game_screen/view/components/tanks/info_overlay.dart';
+import 'package:tank_battle_city/features/game_screen/view/game_screen_view_model.dart';
 import 'dart:ui' as ui;
 
 import 'package:tank_battle_city/generated/assets.dart';
 
-class DefaultTankBotWidget extends StatelessWidget {
-  const DefaultTankBotWidget({super.key, required this.direction});
+class DefaultTankBotWidget extends StatefulWidget {
+  const DefaultTankBotWidget({super.key, required this.tank});
 
-  final Direction direction;
+  final Tank tank;
+
+  @override
+  State<DefaultTankBotWidget> createState() => _DefaultTankBotWidgetState();
+}
+
+class _DefaultTankBotWidgetState extends State<DefaultTankBotWidget> {
+  Offset overlayPosition = Offset.zero;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final box = context.findRenderObject() as RenderBox?;
+      if (box != null) {
+        final newPosition = box.localToGlobal(Offset.zero);
+        setState(() {
+          overlayPosition = newPosition;
+        });
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    final presenter = context.read<GameScreenPresenter>();
+    final presenter = context.read<GameScreenViewModel>();
+
+    final direction = presenter.getTankDirection(widget.tank.position.x, widget.tank.position.y)!;
     final size = MediaQuery.of(context).size.width / presenter.mapSize;
 
-    return Transform.rotate(
-      angle: presenter.getAngleFromDirection(direction),
-      child: SizedBox(height: size, width: size, child: SvgPicture.asset(Assets.svgDefaultTank, colorFilter: ui.ColorFilter.mode(Colors.white, BlendMode.srcIn),)),
+    final OverlayPortalController overlayPortalController = OverlayPortalController();
+
+    return GestureDetector(
+      onLongPressStart: (details) {
+        overlayPortalController.show();
+      },
+      onLongPressEnd: (details) {
+        overlayPortalController.hide();
+      },
+
+      child: OverlayPortal(
+        controller: overlayPortalController,
+        overlayChildBuilder: (_) {
+          return InfoOverlay(overlayPosition: overlayPosition, tank: widget.tank, sizeChild: size);
+        },
+
+        child: SizedBox(
+          height: size,
+          width: size,
+          child: Transform.rotate(
+            angle: presenter.getAngleFromDirection(direction),
+            child: SvgPicture.asset(
+              Assets.svgDefaultTank,
+              colorFilter: ui.ColorFilter.mode(Colors.white, BlendMode.srcIn),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
+

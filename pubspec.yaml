@@ -1,6 +1,6 @@
 name: tank_battle_city
 description: "A new Flutter project."
-version: 0.0.0+6
+version: 0.1.0
 
 environment:
   sdk: ^3.8.0
