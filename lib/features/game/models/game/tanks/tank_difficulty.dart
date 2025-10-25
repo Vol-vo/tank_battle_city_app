@@ -1,0 +1,4 @@
+enum TankDifficulty {
+  ease,
+  medium,
+}

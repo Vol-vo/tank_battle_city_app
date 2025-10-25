@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tank_battle_city/features/menu_screen/menu_screen_bloc/menu_screen_bloc.dart';
+import 'package:tank_battle_city/features/menu/menu_screen_bloc/menu_screen_bloc.dart';
 import 'package:tank_battle_city/main/router/app_router.dart';
 
 class StarterMain extends StatefulWidget {

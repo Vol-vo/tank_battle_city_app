@@ -12,18 +12,49 @@ part of 'app_router.dart';
 
 /// generated route for
 /// [GameScreen]
-class GameRoute extends PageRouteInfo<void> {
-  const GameRoute({List<PageRouteInfo>? children})
-    : super(GameRoute.name, initialChildren: children);
+class GameRoute extends PageRouteInfo<GameRouteArgs> {
+  GameRoute({
+    Key? key,
+    required GameSettings gameSettings,
+    List<PageRouteInfo>? children,
+  }) : super(
+         GameRoute.name,
+         args: GameRouteArgs(key: key, gameSettings: gameSettings),
+         initialChildren: children,
+       );
 
   static const String name = 'GameRoute';
 
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const GameScreen();
+      final args = data.argsAs<GameRouteArgs>();
+      return GameScreen(key: args.key, gameSettings: args.gameSettings);
     },
   );
+}
+
+class GameRouteArgs {
+  const GameRouteArgs({this.key, required this.gameSettings});
+
+  final Key? key;
+
+  final GameSettings gameSettings;
+
+  @override
+  String toString() {
+    return 'GameRouteArgs{key: $key, gameSettings: $gameSettings}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! GameRouteArgs) return false;
+    return key == other.key && gameSettings == other.gameSettings;
+  }
+
+  @override
+  int get hashCode => key.hashCode ^ gameSettings.hashCode;
 }
 
 /// generated route for
@@ -75,17 +106,17 @@ class MenuRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [MenuWrapperScreen]
-class MenuWrapperRoute extends PageRouteInfo<void> {
-  const MenuWrapperRoute({List<PageRouteInfo>? children})
-    : super(MenuWrapperRoute.name, initialChildren: children);
+/// [SettingsGameScreen]
+class SettingsGameRoute extends PageRouteInfo<void> {
+  const SettingsGameRoute({List<PageRouteInfo>? children})
+    : super(SettingsGameRoute.name, initialChildren: children);
 
-  static const String name = 'MenuWrapperRoute';
+  static const String name = 'SettingsGameRoute';
 
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const MenuWrapperScreen();
+      return const SettingsGameScreen();
     },
   );
 }

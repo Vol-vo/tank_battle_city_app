@@ -1,8 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:tank_battle_city/features/game_screen/view/game_screen.dart';
-import 'package:tank_battle_city/features/history_game_screen/history_game_screen.dart';
-import 'package:tank_battle_city/features/menu_screen/menu_screen.dart';
+import 'package:tank_battle_city/features/game/models/game/settings/game_settings.dart';
+import 'package:tank_battle_city/features/game/view/game_screen.dart';
+import 'package:tank_battle_city/features/history_game/history_game_screen.dart';
+import 'package:tank_battle_city/features/menu/menu_screen.dart';
+import 'package:tank_battle_city/features/settings_game/settings_game_screen.dart';
 import 'package:tank_battle_city/home/home_screen.dart';
 import 'package:tank_battle_city/main/router/app_routers.dart';
 
@@ -17,18 +19,23 @@ class AppRouter extends RootStackRouter {
       initial: true,
       children: [
         AutoRoute(
-          page: MenuWrapperRoute.page,
-          children: [
-            AutoRoute(
-              page: MenuRoute.page,
-              path: AppRoutes.menuScreen,
-              initial: true,
-            ),
-          ],
+          page: MenuRoute.page,
+          path: AppRoutes.menuScreen,
+          initial: true,
         ),
-        AutoRoute(page: HistoryGameRoute.page, path: AppRoutes.historyGameScreen),
+        AutoRoute(
+          page: HistoryGameRoute.page,
+          path: AppRoutes.historyGameScreen,
+        ),
       ],
     ),
-    AutoRoute(page: GameRoute.page, path: '/${AppRoutes.gameScreen}'),
+    AutoRoute(
+      page: SettingsGameRoute.page,
+      path: '/${AppRoutes.settingsGameScreen}',
+    ),
+    AutoRoute(
+      page: GameRoute.page,
+      path: '/${AppRoutes.gameScreen}',
+    ),
   ];
 }
