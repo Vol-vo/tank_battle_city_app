@@ -10,19 +10,19 @@ class GameScreenView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final presenter = context.watch<GameScreenViewModel>();
+    final viewModel = context.watch<GameScreenViewModel>();
 
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
           centerTitle: true,
           iconTheme: IconThemeData(color: Colors.white, size: 25),
-          title: Text('Turns: ${presenter.countTurns.toString()}', style: TextStyle(color: Colors.white)),
+          title: Text('Turns: ${viewModel.countTurns.toString()}', style: TextStyle(color: Colors.white)),
           backgroundColor: AppColor.background,
         ),
         body: ColoredBox(
           color: AppColor.background,
-          child: presenter.countTurns > 0
+          child: viewModel.countTurns > 0
               ? Column(
                   children: [
                     MapWidget(),

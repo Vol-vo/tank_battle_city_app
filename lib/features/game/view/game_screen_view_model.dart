@@ -24,9 +24,11 @@ class GameScreenViewModel with ChangeNotifier {
   int get countTurns => game.countTurns.value;
   Stream<TurnStatus> get turnStatusStream => game.turnStatus.stream;
 
+  List<Tank> get tanks => game.tanks;
+
   void init() {
     game = Game(gameSettings);
-    turnStatusStream.listen((event) {
+    turnStatusStream.listen((_) {
       notifyListeners();
     });
   }
@@ -38,14 +40,19 @@ class GameScreenViewModel with ChangeNotifier {
   double getAngleFromDirection(Direction direction) {
     switch (direction) {
       case Direction.north:
-        return 0;
-      case Direction.south:
-        return pi;
-      case Direction.west:
         return -pi / 2;
-      case Direction.east:
+      case Direction.south:
         return pi / 2;
+      case Direction.west:
+        return 0;
+      case Direction.east:
+        return pi;
     }
+  }
+
+  double getTurnsFromDirection(Direction direction) {
+    final angle = getAngleFromDirection(direction);
+    return angle / (2 * pi);
   }
 
   void nextTurn() {

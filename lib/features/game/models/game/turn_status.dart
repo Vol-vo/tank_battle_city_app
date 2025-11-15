@@ -3,4 +3,5 @@ enum TurnStatus {
   firstMove,
   secondMove,
   thirdMove,
+  fire,
 }

@@ -26,13 +26,12 @@ class EasyTankBot extends Tank {
 
   @override
   void firstMove (List<Tank> tanks) {
-    direction = Direction.values[Random().nextInt(4)];
+    direction = Direction.values[Random().nextInt(Direction.values.length)];
   }
 
   @override
   void secondMove (List<Tank> tanks) {
-    // final move = Random().nextInt(3);
-    final move = 2;
+    final move = Random().nextInt(3) + 1;
     final newPosition = getPositionAfterTurnAndGo(direction, move);
 
     position = newPosition ?? position;
@@ -41,16 +40,6 @@ class EasyTankBot extends Tank {
   @override
   void thirdMove (List<Tank> tanks) {
     direction = Direction.values[Random().nextInt(4)];
-  }
-
-  @override
-  void move(List<Tank> tanks) {
-    final dir = Direction.values[Random().nextInt(4)];
-    final move = Random().nextInt(3);
-    final newPosition = getPositionAfterTurnAndGo(dir, move);
-
-    direction = dir;
-    position = newPosition ?? position;
   }
 
   @override

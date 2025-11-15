@@ -93,8 +93,7 @@ class Game {
       case TankDifficulty.ease:
         return Tank.easy(position: position, direction: direction, map: map, name: TankNames.getRandomName());
       case TankDifficulty.medium:
-        // TODO: Handle this case.
-        throw UnimplementedError();
+        return Tank.medium(position: position, direction: direction, map: map, name: TankNames.getRandomName());
     }
   }
 
@@ -117,8 +116,11 @@ class Game {
       tank.thirdMove(tanks);
       turnStatus.value = TurnStatus.thirdMove;
     }
+    await Future.delayed(Duration(seconds: 1));
 
     _fireAllTanks();
+    turnStatus.value = TurnStatus.fire;
+
     tanks.removeWhere((tank) => tank.isNotAlive);
 
     countTurns.add(turns.length);

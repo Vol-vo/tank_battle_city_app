@@ -12,7 +12,7 @@ class SettingsGameScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     GameSettings gameSettings = GameSettings(
       mapSize: 12,
-      bots: [TankDifficulty.ease, TankDifficulty.ease, TankDifficulty.ease, TankDifficulty.ease],
+      bots: [TankDifficulty.medium, TankDifficulty.medium, TankDifficulty.medium, TankDifficulty.medium],
       countPlayer: 0,
     );
 

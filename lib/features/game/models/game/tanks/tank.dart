@@ -24,6 +24,18 @@ abstract class Tank {
     name: name,
   );
 
+  factory Tank.medium({
+    required Position position,
+    required Direction direction,
+    required GameMap map,
+    required String name,
+  }) => MediumTankBot(
+    position: position,
+    direction: direction,
+    map: map,
+    name: name,
+  );
+
   abstract int healthPoint;
 
   int get maxHealthPoint;
@@ -39,14 +51,12 @@ abstract class Tank {
 
   bool get isNotAlive => !isAlive;
 
-  void move(List<Tank> tanks);
-
   void firstMove (List<Tank> tanks);
   void secondMove (List<Tank> tanks);
   void thirdMove (List<Tank> tanks);
 
   Position? getPositionAfterTurnAndGo(Direction direction, int move) {
-    late Position newPosition;
+    Position? newPosition;
 
     switch (direction) {
       case Direction.north:
@@ -101,6 +111,8 @@ abstract class Tank {
 
     return false;
   }
+
+
 
   Tank copyWith({Position? position, Direction? direction, GameMap? map});
 }
